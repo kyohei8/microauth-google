@@ -10,7 +10,7 @@ const provider = 'google';
 const {OAuth2} = google.auth
 const plus = google.plus('v1')
 const DEFAULT_SCOPES = [
-  'https://www.googleapis.com/auth/plus.me'
+  'https://www.googleapis.com/auth/plus.login'
 ]
 
 const getToken = (oauth2Client, code) => new Promise((resolve, reject) => {
