@@ -10,7 +10,7 @@ const provider = 'google';
 const {OAuth2} = google.auth
 const plus = google.plus('v1')
 const DEFAULT_SCOPES = [
-  'https://www.googleapis.com/auth/plus.login'
+  'https://www.googleapis.com/auth/userinfo.email'
 ]
 
 const getToken = (oauth2Client, code) => new Promise((resolve, reject) => {
@@ -42,11 +42,7 @@ const microAuthGoogle = ({
   const states = [];
   const oauth2Client = new OAuth2(clientId, clientSecret, callbackUrl)
 
-  scopes = DEFAULT_SCOPES.concat(scopes).reduce((scopes, scope) => {
-    if (scopes.includes(scope)) return scopes
-    scopes.push(scope)
-    return scope
-  })
+  scopes = DEFAULT_SCOPES.concat(scopes)
 
   return fn => async (req, res, ...args) => {
     const {pathname, query} = url.parse(req.url)
